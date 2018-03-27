@@ -64,7 +64,7 @@ getRallyPublicDNS ()
 
   rallyPublicDNS=$(aws ec2 describe-instances \
     --region ${region} \
-    --query  'Reservations[0].Instances[0].NetworkInterfaces[0].Association.PrivateDnsName' \
+    --query  'Reservations[0].Instances[0].NetworkInterfaces[0].PrivateIpAddresses[0].PrivateDnsName' \
     --instance-ids ${rallyInstanceID} \
     --output text)
 
