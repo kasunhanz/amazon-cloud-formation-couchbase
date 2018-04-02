@@ -32,11 +32,7 @@ instanceID=$(curl -s http://169.254.169.254/latest/dynamic/instance-identity/doc
   | jq '.instanceId' \
   | sed 's/^"\(.*\)"$/\1/' )
 
-nodePublicDNS=$(aws ec2 describe-instances \
-    --region ${region} \
-    --query  'Reservations[0].Instances[0].NetworkInterfaces[0].PrivateIpAddresses[0].PrivateIpAddress' \
-    --instance-ids ${rallyInstanceID} \
-    --output text)
+nodePublicDNS=`curl http://169.254.169.254/latest/meta-data/local-hostname`
 
 echo "Using the settings:"
 echo adminUsername \'$adminUsername\'
